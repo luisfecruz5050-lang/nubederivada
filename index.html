@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Derivadas</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Calculadora de Derivadas</h2>
+
+    <p>Escribe una función (ej: x*x, Math.sin(x), x**3)</p>
+    <input type="text" id="funcion" placeholder="f(x)">
+    
+    <p>Valor de x:</p>
+    <input type="number" id="valorX" placeholder="x">
+
+    <br>
+    <button onclick="derivar()">Calcular Derivada</button>
+
+    <h3 id="resultado"></h3>
+
+    <script>
+        function derivar() {
+            let f = document.getElementById("funcion").value;
+            let x = parseFloat(document.getElementById("valorX").value);
+
+            let h = 0.0001;
+
+            try {
+                let fx = eval(f);
+                let fxh = eval(f.replace(/x/g, `(${x + h})`));
+
+                let derivada = (fxh - fx) / h;
+
+                document.getElementById("resultado").innerText = 
+                    "Derivada aproximada: " + derivada;
+            } catch (e) {
+                document.getElementById("resultado").innerText = 
+                    "Error en la función";
+            }
+        }
+    </script>
+
+</body>
+</html>
